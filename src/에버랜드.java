@@ -9,7 +9,9 @@ public class 에버랜드 {
 		//TODO Auto-generated method stub
 			Scanner myInput = new Scanner(System.in);
 			int date1;
-			String ticket = "", preferential = "", adult = "", passwd = null;
+			String ticket = "", adult = "", passwd = null;
+			String preferential = "";
+			String b = "";
 			int pay = 0, count, sale, age = 0, inputPreferential = 0, totalPay = 0;
 			String YN = null;
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -17,6 +19,13 @@ public class 에버랜드 {
 			int thisYear = Integer.parseInt(today.substring(0,4));
 			int thisMonth = Integer.parseInt(today.substring(4,6));
 			int thisDay = Integer.parseInt(today.substring(6,8));
+			String[] saveTicket = new String[100];
+			String[] saveAdult = new String[100];
+			int[] saveCount = new int[100];
+			int[] savePay = new int[100];
+			int[] savePreferential = new int[100];
+			String[] saveB = new String[100];
+			
 		
 		do {
 			System.out.print("날짜는? ");
@@ -152,12 +161,20 @@ public class 에버랜드 {
 		    }
 		 
 		    totalPay = count * pay;
+		    saveTicket[count] = ticket;
+		    saveAdult[count] = adult;
+		    saveCount[count] = count;
+		    savePay[count] = pay;
+		    saveB[count] = b;
+		    count ++;
 		    
 			System.out.println();
-			System.out.printf("총 티켓 가격은 %d원 입니다.\n감사합니다.", pay);
+			System.out.printf("총 티켓 가격은 %d원 입니다.\n감사합니다.", pay*count);
 		    System.out.println();
 			System.out.print("================= 에버랜드 ==================\n");
-			System.out.printf("%s %s  x%d매  %d  %s\n", ticket, adult, count, totalPay, preferential);
+			for (int index = 0; index < count; index ++) {
+			System.out.printf("%s %s  x%d매  %d  %s\n", saveTicket, saveAdult[index], saveCount[index],
+					                                    savePay[index]*saveCount[index], saveB[index]);}
 			System.out.print("===========================================\n");
 			//
 			System.out.println("추가 주문 Y, 종료 N");
@@ -172,7 +189,7 @@ public class 에버랜드 {
 			}
 			
 		} while(true);
-		myInput.close(); 
+		myInput.close();
 	 }
 		
 }
